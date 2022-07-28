@@ -1,0 +1,19 @@
+.btns{
+    display: flex;
+	align-items: center ;
+	justify-content: center;
+    margin: 40px;
+}
+.btns button{
+    padding: 10px;
+    background-color: rgb(206, 168, 241);
+    width: 10%;
+    font-size: 25px;
+    border-radius: 15px;
+    margin: 20px;
+}
+.graph{
+    text-align: center;
+    text-transform: capitalize;
+    color: blueviolet;
+}

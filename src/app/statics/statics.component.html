@@ -1,0 +1,12 @@
+<div class="btns">
+    <button (click)="get_values('seconds')">Seconds</button>
+    <button (click)="get_values('minutes')">Minutes</button>
+    <button (click)="get_values('hours')">Hours</button>
+    <button (click)="get_values('days')">Days</button>
+    <button (click)="get_values('month')">Month</button>
+    <button (click)="get_values('year')">Years</button>
+</div>
+<div class="graph" *ngFor="let item of show_graph">
+    <h1>{{item.item.val}}</h1>
+    <div echarts [options]='item.item'></div>
+</div>

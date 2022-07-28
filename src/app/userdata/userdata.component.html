@@ -1,0 +1,201 @@
+<div class="background">
+    <div class="eleven">
+        <h1>Welcome name</h1>
+    </div>
+    <div class="button">
+        <a href="statics">
+            <button>View Statics</button>
+        </a>
+    </div>
+    <div class="item">
+        <h2 style="color: blueviolet;"> Load 1</h2>
+        <div class="row">
+            <div class="offset-sm-2 col-sm-4">
+                <div echarts [options]="item1_currentgauge" ></div>
+            </div>
+            <div class="col-sm-4">
+                <div echarts [options]="item_voltagegauge" ></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-sm-2 col-sm-4">
+                <div class="card border-primary mt-3 mb-3" style="max-width: 18rem;">
+                    <div class="card-body pt-2">
+                        <h2 class="card-title">
+                           {{power.item1 | number:'.1-3' }} kwh
+                        </h2>
+                    </div>
+                    <div class="card-footer pb-2"><h3>Power</h3></div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <label class="rocker" >
+                    <input type="checkbox" (click)="switch(switch1)"checked>
+                    <span class="switch-left">OFF</span>
+                    <span class="switch-right">ON</span>
+                  </label>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <h2 style="color: blueviolet;"> Load 2</h2>
+        <div class="row">
+            <div class="offset-sm-2 col-sm-4">
+                <div echarts [options]="item2_currentgauge" ></div>
+            </div>
+            <div class="col-sm-4">
+                <div echarts [options]="item_voltagegauge" ></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-sm-2 col-sm-4">
+                <div class="card border-primary mt-3 mb-3" style="max-width: 18rem;">
+                    <div class="card-body pt-2">
+                        <h2 class="card-title">
+                           {{power.item1 | number:'.1-3'}} kwh
+                        </h2>
+                    </div>
+                    <div class="card-footer pb-2"><h3>Power</h3></div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <label class="rocker" >
+                    <input type="checkbox" (click)="switch(switch2)"checked>
+                    <span class="switch-left">OFF</span>
+                    <span class="switch-right">ON</span>
+                  </label>
+            </div>
+        </div>
+    </div>
+   <!--<div class="item">
+        <h2 style="color: blueviolet;"> Load 3</h2>
+        <div class="row">
+            <div class="offset-sm-2 col-sm-4">
+                <div echarts [options]="item3_currentgauge" ></div>
+            </div>
+            <div class="col-sm-4">
+                <div echarts [options]="item_voltagegauge" ></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-sm-2 col-sm-4">
+                <div class="card border-primary mt-3 mb-3" style="max-width: 18rem;">
+                    <div class="card-body pt-2">
+                        <h2 class="card-title">
+                           {{item3_power | number:'.1-3'}} kwh
+                        </h2>
+                    </div>
+                    <div class="card-footer pb-2"><h3>Power</h3></div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <label class="rocker" >
+                    <input type="checkbox" (click)="switch(switch3)"checked>
+                    <span class="switch-left">OFF</span>
+                    <span class="switch-right">ON</span>
+                  </label>
+            </div>
+        </div>
+    </div>--> 
+    <div class="item">
+        <h2 style="color: blueviolet;">Total</h2>
+        <div class="row">
+            <div class="offset-sm-2 col-sm-4 totalpower">
+                <div class="card  border-secondary" style="max-width: 18rem;">
+                    <div class="card-body pt-2">
+                        <h2 class="card-title">
+                           {{power.item1 + power.item2 | number:'.1-3'}} kwh
+                        </h2>
+                    </div>
+                    <div class="card-footer pb-2"><h3>Total Power</h3></div>
+                </div><br><br><br>
+                <div class="card  border-secondary" style="max-width: 18rem;">
+                    <div class="card-body pt-2">
+                        <h2 class="card-title">
+                           ₹ {{total_cost | number:'.1-3'}}
+                        </h2>
+                    </div>
+                    <div class="card-footer pb-2"><h3>Total cost</h3></div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div echarts [options]="powergraph" ></div>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <h2 style="color: blueviolet;"> Per unit rate in TNEB</h2>
+        <div class="row">
+            <div class="container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                          <th>Scheme</th>
+                          <th>Unit</th>
+                          <th>Per unit (₹)</th>
+                          <th>Fixed charges Per Month</th>
+                        </tr>
+                      </thead>
+                  <tbody>
+                    <tr>
+                      <td>0 to 100</td>
+                      <td>0 - 100</td>
+                      <td>--</td>
+                      <td>--</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="2">0 to 200</td>
+                      <td>0 - 100</td>
+                      <td>--</td>
+                      <td rowspan="2">20</td>
+                    </tr>
+                    <tr>
+                      <td>101 - 200</td>
+                      <td>1.5</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">0 to 500</td>
+                        <td>0 - 100</td>
+                        <td>--</td>
+                        <td rowspan="3">30</td>
+                      </tr>
+                      <tr>
+                        <td>101 - 200</td>
+                        <td>2</td>
+                      </tr>
+                      <tr>
+                        <td>201 - 500</td>
+                        <td>3</td>
+                      </tr>
+                      <tr>
+                        <td rowspan="4">> 500</td>
+                        <td>0 - 100</td>
+                        <td>--</td>
+                        <td rowspan="4">30</td>
+                      </tr>
+                      <tr>
+                        <td>101 - 200</td>
+                        <td>3.5</td>
+                      </tr>
+                      <tr>
+                        <td>201 - 500</td>
+                        <td>4.6</td>
+                      </tr>
+                      <tr>
+                        <td>>500</td>
+                        <td>6.6</td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+
+

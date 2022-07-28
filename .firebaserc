@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "energymeterpro": {
+      "hosting": {
+        "energymeter": [
+          "energymeterpro"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "energymeterpro"
+  }
+}
