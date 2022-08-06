@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { getDatabase, set, ref, onValue } from 'firebase/database';
 import { EChartsOption } from 'echarts';
+import * as AOS from 'aos'
 
 @Component({
   selector: 'app-userdata',
@@ -31,6 +32,7 @@ export class UserdataComponent implements OnInit {
   }
 
   ngOnInit(): any {
+    AOS.init();
     const db = getDatabase();
     const cur1 = ref(db, 'current/item1');
     let curdata1 = 0;
