@@ -13,6 +13,8 @@ import { getAnalytics } from "firebase/analytics";
 import { UserdataComponent } from './userdata/userdata.component';
 import { ServiceComponent } from './service/service.component';
 import { StaticsComponent } from './statics/statics.component';
+import { DataCompareComponent } from './data-compare/data-compare.component';
+import { LifespanComponent } from './lifespan/lifespan.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDBeLV0AEb2F1FynagrHJtmoZTmDTAUP_c",
@@ -34,7 +36,9 @@ const analytics = getAnalytics(app);
     LoginComponent,
     UserdataComponent,
     ServiceComponent,
-    StaticsComponent
+    StaticsComponent,
+    DataCompareComponent,
+    LifespanComponent
   ],
   imports: [
     BrowserModule,

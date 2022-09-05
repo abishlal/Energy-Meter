@@ -13,17 +13,14 @@ export class UserdataComponent implements OnInit {
   power: any = {
     item1: [],
     item2: [],
-    item3: [],
   };
 
   item1_currentgauge: EChartsOption = {};
   item2_currentgauge: EChartsOption = {};
-  item3_currentgauge: EChartsOption = {};
   item_voltagegauge: EChartsOption = {};
   powergraph: EChartsOption = {};
   switch1: any = 'sw1';
   switch2: any = 'sw2';
-  switch3: any = 'sw3';
   total_power: any;
   total_cost: any;
 
@@ -45,12 +42,6 @@ export class UserdataComponent implements OnInit {
     onValue(cur2, (snapshot) => {
       curdata2 = snapshot.val();
       this.currentgauge2(curdata2);
-    });
-    const cur3 = ref(db, 'current/item3');
-    let curdata3 = 0;
-    onValue(cur3, (snapshot) => {
-      curdata3 = snapshot.val();
-      this.currentgauge3(curdata3);
     });
     const vol = ref(db, 'voltage');
     let voldata = 0;
@@ -74,6 +65,7 @@ export class UserdataComponent implements OnInit {
         this.costcalculation(total_data);
         this.graphfun(item_loads,total_data);
       });
+    
     }
 
     // this.costcalculation(total_data)
@@ -254,78 +246,20 @@ export class UserdataComponent implements OnInit {
       ],
     };
   }
-  currentgauge3(data: any) {
-    this.item3_currentgauge = {
-      series: [
-        {
-          type: 'gauge',
-          min: 0,
-          max: 20,
-          progress: {
-            show: true,
-            width: 18,
-          },
-          axisLine: {
-            lineStyle: {
-              width: 18,
-            },
-          },
-          axisTick: {
-            show: false,
-          },
-          splitLine: {
-            length: 15,
-            lineStyle: {
-              width: 3,
-              color: '#201785',
-            },
-          },
-          axisLabel: {
-            distance: 25,
-            color: '#999',
-            fontSize: 18,
-          },
-          anchor: {
-            show: true,
-            showAbove: true,
-            size: 25,
-            itemStyle: {
-              borderWidth: 10,
-            },
-          },
-          title: {
-            show: false,
-          },
-          detail: {
-            valueAnimation: true,
-            fontSize: 30,
-            offsetCenter: [0, '70%'],
-            formatter: '{value} Amp',
-            color: '#c2325d',
-          },
-          data: [
-            {
-              value: data,
-            },
-          ],
-        },
-      ],
-    };
-  }
 
   // power graph
   graphfun(item_loads: any, total_data: any) {
     this.powergraph = {
       xAxis: {
         type: 'category',
-        data: item_loads,
+        data: ['load 1', 'load 2'],
       },
       yAxis: {
         type: 'value',
       },
       series: [
         {
-          data: total_data,
+          data: [this.power.item1, this.power.item2],
           type: 'bar',
           showBackground: true,
           backgroundStyle: {
@@ -375,8 +309,7 @@ export class UserdataComponent implements OnInit {
   isShowDiv = false;
   sw1 = false;
   sw2 = false;
-  sw3 = false;
-
+ 
   switch(data: any) {
     const db = getDatabase();
     if (data == 'sw1') {
@@ -403,24 +336,14 @@ export class UserdataComponent implements OnInit {
         });
       }
     }
-    if (data == 'sw3') {
-      this.sw3 = !this.sw3;
-      if (this.sw3) {
-        set(ref(db, 'switching/item3'), {
-          item3: 'ON',
-        });
-      } else {
-        set(ref(db, 'switching/item3'), {
-          item3: 'OFF',
-        });
-      }
-    }
+  
   }
 
   costcalculation(total_units: any) {
     let pow = 0 ;
     for (const power of total_units) {
       pow = pow + power;
+      pow = pow
     }
     if (pow >= 0 && pow <= 100) {
       this.total_cost = 0;

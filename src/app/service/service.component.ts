@@ -7,11 +7,9 @@ import { getDatabase, set, ref, onValue, remove } from 'firebase/database';
   styleUrls: ['./service.component.css'],
 })
 export class ServiceComponent implements OnInit {
-  current_data: any = [];
   current: any = {
     item1: [],
     item2: [],
-    item3: [],
   };
 
   dbvalues: any = {
@@ -94,6 +92,17 @@ export class ServiceComponent implements OnInit {
         value: val.value,
       });
     }
+    if (tokey == 'minutes') {
+      for (const val of minutes) {
+        let time: any = val.time / 10000;
+        var times: any = time.toFixed(0) * 10000;
+
+        set(ref(db, mainkey + '/minutesdata/' + times), {
+          time: val.time,
+          value: val.value,
+        });
+      }
+    }
   }
 
   get_db(mainkey: any, key: string, obj: any, cb: any) {
@@ -107,7 +116,6 @@ export class ServiceComponent implements OnInit {
 
   get_values() {
     const db = getDatabase();
-
     for (const key in this.current) {
       const cururl = ref(db, 'current/' + key);
       onValue(cururl, (snapshot) => {
@@ -122,6 +130,7 @@ export class ServiceComponent implements OnInit {
 
     for (const key in this.current) {
       let units_current = (this.current[key][0] * 230) / 3600;
+
       set(ref(db, key + '/' + 'seconds/' + timestamp), {
         value: units_current,
         time: timestamp,
@@ -133,12 +142,11 @@ export class ServiceComponent implements OnInit {
 
   update_units(key: any, units_current: any) {
     const db = getDatabase();
-    let Total_units = 0;
+    let Total_units;
     const total_unit_url = ref(db, 'Total_units/' + key);
     onValue(total_unit_url, (snapshot) => {
       Total_units = snapshot.val().value;
     });
-
     set(ref(db, 'Total_units/' + key), {
       value: Total_units + units_current,
     });

@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-sm-12">
+        <table>
+            <tr>
+                <th>S.No</th>
+                <th>Load</th>
+                <th>Power Consumption</th>
+                <th>Expeted Power Consumption</th>
+                <th>Power difference</th>
+                <th>Life Span</th>
+                <th>Malfunctioning</th>
+            </tr>
+            <tr *ngFor="let item of total_data" [ngClass]="{'danger': item.power_out - item.power_in < 0}">
+                <td>{{item.no}}</td>
+                <td *ngIf="item.item == 'item1'">Load 1</td>
+                <td *ngIf="item.item == 'item2'">Load 2</td>
+                <td>{{item.power_in}}</td>
+                <td>{{item.power_out}}</td>
+                <td>{{item.power_out - item.power_in}}</td>
+                <td>{{item.date | date:'medium'}}</td>
+                <td *ngIf="item.power_out - item.power_in >0">Good Condition</td>
+                <td *ngIf="item.power_out - item.power_in < 0">Malfunctioning</td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+<div>
+    <div class="row">
+        <div class="offset-sm-3 col-sm-6">
+            <h3>Load Details</h3>
+            <form [formGroup]="power_date" (ngSubmit)="submit_value()">
+                <div class="form-group">
+                    <p>Please select your Load</p>
+                      <input type="radio" id="html" name="load" formControlName="item" value="item1">
+                      <label for="html">Load 1</label><br>
+                      <input type="radio" id="css" name="load" formControlName="item" value="item2">
+                      <label for="css">Load 2</label><br>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="power">Enter the power limit</label>
+                    <input type="number" class="form-control" formControlName="power">
+                </div>
+                <div class="form-group mt-3">
+                    <label for="power">Enter the purchased date</label>
+                    <input type="datetime-local" class="form-control" formControlName="date" name="time">
+                </div>
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-block btn-primary round form-control">ADD</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

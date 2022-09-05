@@ -4,7 +4,13 @@
     </div>
     <div class="button">
         <a href="statics">
-            <button>View Statics</button>
+            <button>View statistics</button>
+        </a>
+        <a class="mx-5"  href="datacompare">
+            <button>View data compare</button>
+        </a>
+        <a class="mx-5"  href="lifespan">
+            <button>View lifeSpan</button>
         </a>
     </div>
     <div class="item">
@@ -22,11 +28,11 @@
                 <div class="card border-primary mt-3 mb-3" style="max-width: 18rem;">
                     <div class="card-body pt-2">
                         <h2 class="card-title">
-                            {{power.item1 | number:'.1-3' }} kwh
+                            {{power.item1 | number:'.1-4' }} Ws
                         </h2>
                     </div>
                     <div class="card-footer pb-2">
-                        <h3>Power</h3>
+                        <h3>Energy</h3>
                     </div>
                 </div>
             </div>
@@ -54,7 +60,7 @@
                 <div class="card border-primary mt-3 mb-3" style="max-width: 18rem;">
                     <div class="card-body pt-2">
                         <h2 class="card-title">
-                            {{power.item2 | number:'.1-3'}} kwh
+                            {{power.item2 | number:'.1-4'}} Whr
                         </h2>
                     </div>
                     <div class="card-footer pb-2">
@@ -108,7 +114,7 @@
                 <div class="card  border-secondary" style="max-width: 18rem;">
                     <div class="card-body pt-2">
                         <h2 class="card-title">
-                            {{power.item1 + power.item2 | number:'.1-3'}} kwh
+                            {{(power.item1 + power.item2)/1000 | number:'.1-4'}} kWhr
                         </h2>
                     </div>
                     <div class="card-footer pb-2">

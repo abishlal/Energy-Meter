@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { getDatabase, ref, onValue } from 'firebase/database';
-import { EChartsOption } from 'echarts';
+
 
 @Component({
   selector: 'app-statics',
@@ -8,7 +8,7 @@ import { EChartsOption } from 'echarts';
   styleUrls: ['./statics.component.css'],
 })
 export class StaticsComponent implements OnInit {
-  mainkey: any = ['item1', 'item2', 'item3'];
+  mainkey: any = ['item1', 'item2'];
   graphurl: any = 'seconds';
   data: any = {};
   show_graph: any = [
@@ -17,9 +17,6 @@ export class StaticsComponent implements OnInit {
     },
     {
       item: {},
-    },
-    {
-      item3: {},
     },
   ];
 
@@ -68,13 +65,12 @@ export class StaticsComponent implements OnInit {
     let index: number;
     const db = getDatabase();
     this.graphurl = url;
-    // console.log("getvalues called",url1)
 
     for (const mainkey of this.mainkey) {
       const urldb = ref(db, mainkey + '/' + url);
-      // console.log("getvalue",mainkey + '/' + url,url1,url);
+     
       onValue(urldb, (snapshot) => {
-        // console.log("onvalue",mainkey + '/' + url,url1,url)
+
         val = snapshot.val();
         this.data[url] = val;
         index = this.mainkey.indexOf(mainkey);
