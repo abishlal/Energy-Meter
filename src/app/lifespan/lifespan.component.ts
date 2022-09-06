@@ -29,10 +29,10 @@ export class LifespanComponent implements OnInit {
       const current_url = ref(db, 'current/' + item);
       onValue(current_url, (snapshot) => {
         if(item == 'item1'){
-          this.total_data[0].power_in = snapshot.val()
+          this.total_data[0].power_in = snapshot.val()*230
         }
         if(item == 'item2'){
-          this.total_data[1].power_in = snapshot.val()
+          this.total_data[1].power_in = snapshot.val()*230
         }
       });
 

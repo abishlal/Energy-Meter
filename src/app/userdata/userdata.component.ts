@@ -62,7 +62,7 @@ export class UserdataComponent implements OnInit {
         this.power[key] = snapshot.val();
         total_data.push(snapshot.val());
         total_data = total_data.slice(total_data.length - 2, total_data.length);
-        this.costcalculation(total_data);
+        this.costcalculation(this.power);
         this.graphfun(item_loads,total_data);
       });
     
@@ -340,11 +340,8 @@ export class UserdataComponent implements OnInit {
   }
 
   costcalculation(total_units: any) {
-    let pow = 0 ;
-    for (const power of total_units) {
-      pow = pow + power;
-      pow = pow
-    }
+    let pow = (total_units.item1 + total_units.item2)/1000;
+
     if (pow >= 0 && pow <= 100) {
       this.total_cost = 0;
     } else if (pow > 100 && pow <= 200) {
